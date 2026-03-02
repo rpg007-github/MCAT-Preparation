@@ -472,9 +472,40 @@ body {
 .card:nth-child(6) { animation-delay: 0.25s; }
 .card:nth-child(7) { animation-delay: 0.3s; }
 .card:nth-child(8) { animation-delay: 0.35s; }
+
+/* ─── WCAG 2.1 AA: Visible focus indicators ─── */
+:focus-visible {
+  outline: 3px solid #005fcc !important;
+  outline-offset: 2px !important;
+}
+.tab-btn:focus-visible, .nav-btn:focus-visible {
+  outline: 3px solid #005fcc !important;
+  outline-offset: 2px !important;
+}
+/* ─── Skip link ─── */
+.skip-link {
+  position: absolute;
+  top: -100px;
+  left: 1rem;
+  background: #005fcc;
+  color: #fff;
+  padding: 0.6rem 1.2rem;
+  border-radius: 0 0 6px 6px;
+  font-weight: 700;
+  font-size: 0.95rem;
+  text-decoration: none;
+  z-index: 9999;
+  transition: top 0.2s;
+}
+.skip-link:focus {
+  top: 0;
+}
+
 </style>
 </head>
 <body>
+<a href="#main-content" class="skip-link">Skip to main content</a>
+
 
 <!-- ══════════════ HERO ══════════════ -->
 <div class="hero">
@@ -489,20 +520,20 @@ body {
 </div>
 
 <!-- ══════════════ NAV ══════════════ -->
-<div class="nav-bar">
-  <button class="nav-btn active" onclick="showSection('start')">Start Here</button>
-  <button class="nav-btn" onclick="showSection('mcat')">MCAT Prep</button>
-  <button class="nav-btn" onclick="showSection('bio')">Biology</button>
-  <button class="nav-btn" onclick="showSection('chem')">Chemistry</button>
-  <button class="nav-btn" onclick="showSection('other')">Math &amp; Physics</button>
-  <button class="nav-btn" onclick="showSection('all')">All Resources</button>
+<div class="nav-bar" role="tablist" aria-label="Page sections">
+  <button role="tab" aria-selected="true" aria-controls="sec-start" class="nav-btn active" onclick="showSection('start')">Start Here</button>
+  <button role="tab" aria-selected="false" aria-controls="sec-mcat" class="nav-btn" onclick="showSection('mcat')">MCAT Prep</button>
+  <button role="tab" aria-selected="false" aria-controls="sec-bio" class="nav-btn" onclick="showSection('bio')">Biology</button>
+  <button role="tab" aria-selected="false" aria-controls="sec-chem" class="nav-btn" onclick="showSection('chem')">Chemistry</button>
+  <button role="tab" aria-selected="false" aria-controls="sec-other" class="nav-btn" onclick="showSection('other')">Math &amp; Physics</button>
+  <button role="tab" aria-selected="false" aria-controls="sec-all" class="nav-btn" onclick="showSection('all')">All Resources</button>
 </div>
 
 <!-- ══════════════ MAIN CONTENT ══════════════ -->
-<div class="container">
+<div class="container" id="main-content" role="main">
 
 <!-- ====================== START HERE ====================== -->
-<div class="guide-section active" id="sec-start">
+<div class="guide-section active" id="sec-start" role="tabpanel">
 
   <div class="section-header">
     <div class="section-tag" style="color:var(--accent);">Welcome</div>
@@ -593,22 +624,22 @@ body {
 
   <div class="feature-row">
     <div class="feature-box">
-      <div class="feature-icon">&#128218;</div>
+      <div class="feature-icon"><span aria-hidden="true">&#128218;</span></div>
       <h4>Content Sections</h4>
       <p>Organized reference material with fact tables, formula callouts, mnemonic boxes, and key concept highlights. Written to be concise, not exhaustive. The essentials you need to know.</p>
     </div>
     <div class="feature-box">
-      <div class="feature-icon">&#9989;</div>
+      <div class="feature-icon"><span aria-hidden="true">&#9989;</span></div>
       <h4>Multiple Choice Quiz</h4>
       <p>20 to 50 questions with immediate per-question feedback, detailed explanations, and a running score tracker. Great for testing recall and identifying weak areas.</p>
     </div>
     <div class="feature-box">
-      <div class="feature-icon">&#128196;</div>
+      <div class="feature-icon"><span aria-hidden="true">&#128196;</span></div>
       <h4>Flashcards</h4>
       <p>50+ cards with 3D flip animations. Filter by category to focus on specific topics. Click or tap to flip between the term and definition.</p>
     </div>
     <div class="feature-box">
-      <div class="feature-icon">&#9997;&#65039;</div>
+      <div class="feature-icon"><span aria-hidden="true">&#9997;&#65039;</span></div>
       <h4>Short Answer Practice</h4>
       <p>Type your answer and get graded by a concept-matching engine. It highlights which key ideas you included and which you missed, with a percentage score and model answer.</p>
     </div>
@@ -616,7 +647,7 @@ body {
 </div>
 
 <!-- ====================== MCAT PREP ====================== -->
-<div class="guide-section" id="sec-mcat">
+<div class="guide-section" id="sec-mcat" role="tabpanel">
 
   <div class="section-header">
     <div class="section-tag mcat">MCAT Preparation</div>
@@ -626,7 +657,7 @@ body {
 
   <div class="card-grid">
     <a href="https://rpg007-github.github.io/MCAT-prep-adaptive/" target="_blank" class="card mcat">
-      <div class="card-icon mcat">&#127919;</div>
+      <div class="card-icon mcat"><span aria-hidden="true">&#127919;</span></div>
       <h3>Adaptive Practice Engine</h3>
       <p>The core MCAT practice tool. Questions across biology, biochemistry, chemistry, genetics, and organic chemistry with difficulty levels 1 through 5. You control the difficulty with up and down arrows. Includes a study guide on commonly confused concepts, systems integration, and organic reaction decision frameworks.</p>
       <div class="card-tags">
@@ -638,7 +669,7 @@ body {
     </a>
 
     <a href="https://rpg007-github.github.io/MCAT-prep-medium-hard/" target="_blank" class="card mcat">
-      <div class="card-icon mcat">&#128293;</div>
+      <div class="card-icon mcat"><span aria-hidden="true">&#128293;</span></div>
       <h3>Medium and Hard Questions</h3>
       <p>Focused question set pitched at MCAT difficulty levels 3 through 5. Use this after you have built foundations with the adaptive engine. Covers the topics that appear most frequently on the exam at the difficulty level you will actually encounter.</p>
       <div class="card-tags">
@@ -649,7 +680,7 @@ body {
     </a>
 
     <a href="https://rpg007-github.github.io/MCAT-disease-pathways/" target="_blank" class="card mcat">
-      <div class="card-icon mcat">&#129516;</div>
+      <div class="card-icon mcat"><span aria-hidden="true">&#129516;</span></div>
       <h3>Disease Pathways: Systems Integration</h3>
       <p>Learn foundational science through the lens of eight memorable genetic diseases: sickle cell, cystic fibrosis, Huntington, PKU, Type 1 diabetes, G6PD deficiency, Marfan syndrome, and lysosomal storage diseases. Each disease teaches multiple organ systems and signaling pathways simultaneously, with embedded comprehension checks and MCAT-style examples.</p>
       <div class="card-tags">
@@ -661,7 +692,7 @@ body {
     </a>
 
     <a href="https://rpg007-github.github.io/MCAT-systems-learning-approach/" target="_blank" class="card mcat">
-      <div class="card-icon mcat">&#128300;</div>
+      <div class="card-icon mcat"><span aria-hidden="true">&#128300;</span></div>
       <h3>Systems Learning Approach</h3>
       <p>Deep dive into how organ systems interact. Focuses on diabetes as a multi-system hub (renal, cardiovascular, metabolic, immune), renal function connections, acid-base physiology, and signaling pathway disease connections. Teaches you to trace physiological domino chains the way the MCAT tests them.</p>
       <div class="card-tags">
@@ -672,7 +703,7 @@ body {
     </a>
 
     <a href="https://rpg007-github.github.io/MCAT-CARS-practice/" target="_blank" class="card mcat">
-      <div class="card-icon mcat">&#128214;</div>
+      <div class="card-icon mcat"><span aria-hidden="true">&#128214;</span></div>
       <h3>CARS Practice Passages</h3>
       <p>Full-length CARS-style passages with question sets covering multiple question types. Includes strategy lessons on passage mapping, argument identification, tone analysis, and the elimination method. Timed practice to build the pacing habits CARS demands.</p>
       <div class="card-tags">
@@ -684,7 +715,7 @@ body {
     </a>
 
     <a href="https://rpg007-github.github.io/MCAT-CARS-drills/" target="_blank" class="card mcat">
-      <div class="card-icon mcat">&#128170;</div>
+      <div class="card-icon mcat"><span aria-hidden="true">&#128170;</span></div>
       <h3>CARS Cognitive Drills</h3>
       <p>Six targeted drills that build the specific cognitive skills CARS requires: main idea extraction, tone detection, argument mapping, inference versus assumption identification, answer elimination, and speed comprehension challenges with disappearing text. Think of these as strength training for your reading brain.</p>
       <div class="card-tags">
@@ -695,7 +726,7 @@ body {
     </a>
 
     <a href="https://rpg007-github.github.io/MCAT-Psychology/" target="_blank" class="card mcat">
-      <div class="card-icon mcat">&#129504;</div>
+      <div class="card-icon mcat"><span aria-hidden="true">&#129504;</span></div>
       <h3>Psychology and Sociology</h3>
       <p>Covers the Psychological, Social, and Biological Foundations of Behavior section. Key theories, researchers, terminology, and the commonly tested intersections between psychology, sociology, and biology that the MCAT loves to ask about.</p>
       <div class="card-tags">
@@ -707,7 +738,7 @@ body {
     </a>
 
     <a href="https://rpg007-github.github.io/quiz-tool-biology-chemistry/" target="_blank" class="card mcat">
-      <div class="card-icon mcat">&#9889;</div>
+      <div class="card-icon mcat"><span aria-hidden="true">&#9889;</span></div>
       <h3>Adaptive Quiz Tool</h3>
       <p>Cross-disciplinary adaptive quiz covering biology and chemistry fundamentals. Questions adjust to your performance. Good for mixed review sessions when you want to practice across subjects rather than one topic at a time.</p>
       <div class="card-tags">
@@ -720,7 +751,7 @@ body {
 </div>
 
 <!-- ====================== BIOLOGY ====================== -->
-<div class="guide-section" id="sec-bio">
+<div class="guide-section" id="sec-bio" role="tabpanel">
 
   <div class="section-header">
     <div class="section-tag bio">Biology</div>
@@ -734,7 +765,7 @@ body {
 
   <div class="card-grid">
     <a href="https://rpg007-github.github.io/Biology-basics/" target="_blank" class="card bio">
-      <div class="card-icon bio">&#127793;</div>
+      <div class="card-icon bio"><span aria-hidden="true">&#127793;</span></div>
       <h3>Biology Basics (Bio I)</h3>
       <p>Introductory biology covering the scientific method, biological molecules, cell structure, membranes, transport, energy (photosynthesis and respiration), DNA replication, protein synthesis, cell division, genetics, evolution, and ecology. The starting point for biology majors.</p>
       <div class="card-tags">
@@ -746,7 +777,7 @@ body {
     </a>
 
     <a href="https://rpg007-github.github.io/Biology-II/" target="_blank" class="card bio">
-      <div class="card-icon bio">&#127795;</div>
+      <div class="card-icon bio"><span aria-hidden="true">&#127795;</span></div>
       <h3>Biology II</h3>
       <p>Continuation covering animal physiology, plant biology, ecology, phylogenetics, and diversity of life. Builds on the molecular and cellular foundations from Bio I and moves into organism-level and ecosystem-level biology.</p>
       <div class="card-tags">
@@ -758,7 +789,7 @@ body {
     </a>
 
     <a href="https://rpg007-github.github.io/Cell-Biology-basic/" target="_blank" class="card bio">
-      <div class="card-icon bio">&#128300;</div>
+      <div class="card-icon bio"><span aria-hidden="true">&#128300;</span></div>
       <h3>Cell Biology (Part 1)</h3>
       <p>Cell structure, organelles, membranes, endomembrane system, transport mechanisms, and cell communication. Covers the structural and functional foundations of cell biology at a level appropriate for a dedicated cell bio course.</p>
       <div class="card-tags">
@@ -770,7 +801,7 @@ body {
     </a>
 
     <a href="https://rpg007-github.github.io/Cell-Biology-basic-part-2/" target="_blank" class="card bio">
-      <div class="card-icon bio">&#9878;&#65039;</div>
+      <div class="card-icon bio"><span aria-hidden="true">&#9878;&#65039;</span></div>
       <h3>Cell Biology (Part 2)</h3>
       <p>Enzymes and enzyme kinetics, glycolysis, fermentation, aerobic respiration (citric acid cycle, ETC, oxidative phosphorylation), photosynthesis, cytoskeletal systems (actin, microtubules, intermediate filaments), and cellular movement (kinesin, dynein, myosin, sarcomere).</p>
       <div class="card-tags">
@@ -782,7 +813,7 @@ body {
     </a>
 
     <a href="https://rpg007-github.github.io/Genetics/" target="_blank" class="card bio">
-      <div class="card-icon bio">&#129516;</div>
+      <div class="card-icon bio"><span aria-hidden="true">&#129516;</span></div>
       <h3>Genetics</h3>
       <p>Mendelian genetics, inheritance patterns, pedigree analysis, chromosomal genetics, gene expression, DNA technology, and population genetics. Covers 12 content sections with detailed fact tables and mnemonic aids.</p>
       <div class="card-tags">
@@ -794,7 +825,7 @@ body {
     </a>
 
     <a href="https://rpg007-github.github.io/Genetics-part-2/" target="_blank" class="card bio">
-      <div class="card-icon bio">&#129516;</div>
+      <div class="card-icon bio"><span aria-hidden="true">&#129516;</span></div>
       <h3>Genetics Part 2</h3>
       <p>Continuation of genetics topics with additional depth on gene regulation, epigenetics, genomics, and advanced inheritance patterns. Use after completing the first Genetics module.</p>
       <div class="card-tags">
@@ -806,7 +837,7 @@ body {
     </a>
 
     <a href="https://rpg007-github.github.io/Genetics-advanced/" target="_blank" class="card bio">
-      <div class="card-icon bio">&#129516;</div>
+      <div class="card-icon bio"><span aria-hidden="true">&#129516;</span></div>
       <h3>Advanced Genetics</h3>
       <p>Epigenetics, genomic architecture, quantitative genetics, advanced molecular mechanisms, and evolutionary genomics. Pitched at an upper-division or MCAT-depth level for students who need to go beyond intro genetics.</p>
       <div class="card-tags">
@@ -818,7 +849,7 @@ body {
     </a>
 
     <a href="https://rpg007-github.github.io/Biology-LAB/" target="_blank" class="card bio">
-      <div class="card-icon bio">&#128300;</div>
+      <div class="card-icon bio"><span aria-hidden="true">&#128300;</span></div>
       <h3>Biology Lab</h3>
       <p>Lab techniques, scientific method, microscopy, metric system, biochemistry experiments, diffusion and osmosis, enzyme kinetics, photosynthesis and respiration labs, mitosis and meiosis observation, genetics crosses, DNA extraction, and ecological surveys.</p>
       <div class="card-tags">
@@ -830,7 +861,7 @@ body {
     </a>
 
     <a href="https://rpg007-github.github.io/Biology-lab-basics/" target="_blank" class="card bio">
-      <div class="card-icon bio">&#129514;</div>
+      <div class="card-icon bio"><span aria-hidden="true">&#129514;</span></div>
       <h3>Biology Lab Basics</h3>
       <p>Focused on the fundamental lab skills every biology student needs: measurement, safety protocols, microscope operation, solution preparation, data recording, and basic statistical analysis of lab results.</p>
       <div class="card-tags">
@@ -848,7 +879,7 @@ body {
 
   <div class="card-grid">
     <a href="https://rpg007-github.github.io/Biology-for-non-majors/" target="_blank" class="card bio">
-      <div class="card-icon bio">&#127807;</div>
+      <div class="card-icon bio"><span aria-hidden="true">&#127807;</span></div>
       <h3>Biology for Non-Majors</h3>
       <p>Conceptual biology for students fulfilling general education requirements. Less molecular detail, more "why does this matter" framing. Covers the scientific method, chemistry of life basics, cells, energy, DNA and genetics, evolution, ecology, and human body systems overview.</p>
       <div class="card-tags">
@@ -866,7 +897,7 @@ body {
 
   <div class="card-grid">
     <a href="https://rpg007-github.github.io/DNA-basics/" target="_blank" class="card bio">
-      <div class="card-icon bio">&#129516;</div>
+      <div class="card-icon bio"><span aria-hidden="true">&#129516;</span></div>
       <h3>DNA Basics</h3>
       <p>Focused deep dive on DNA structure, replication, base pairing, the central dogma, transcription, translation, and mutations. Useful as a targeted review for any course that covers molecular biology fundamentals.</p>
       <div class="card-tags">
@@ -878,7 +909,7 @@ body {
     </a>
 
     <a href="https://rpg007-github.github.io/Water-molecule-fundamentals/" target="_blank" class="card bio">
-      <div class="card-icon bio">&#128167;</div>
+      <div class="card-icon bio"><span aria-hidden="true">&#128167;</span></div>
       <h3>Water: The Molecule Behind Everything</h3>
       <p>Molecular structure, hydrogen bonding, emergent properties (cohesion, adhesion, surface tension, specific heat, heat of vaporization), ice density, pH and buffers, water in biological reactions. The chapter every biology textbook starts with, covered thoroughly.</p>
       <div class="card-tags">
@@ -892,7 +923,7 @@ body {
 </div>
 
 <!-- ====================== CHEMISTRY ====================== -->
-<div class="guide-section" id="sec-chem">
+<div class="guide-section" id="sec-chem" role="tabpanel">
 
   <div class="section-header">
     <div class="section-tag chem">Chemistry</div>
@@ -902,7 +933,7 @@ body {
 
   <div class="card-grid">
     <a href="https://rpg007-github.github.io/chemistry/" target="_blank" class="card chem">
-      <div class="card-icon chem">&#9878;&#65039;</div>
+      <div class="card-icon chem"><span aria-hidden="true">&#9878;&#65039;</span></div>
       <h3>General Chemistry I</h3>
       <p>Atomic structure, periodic trends, chemical bonding (ionic, covalent, metallic), Lewis structures, VSEPR theory, nomenclature, reaction types, stoichiometry, gas laws, solution chemistry, and introductory thermochemistry. The standard first-semester general chemistry course.</p>
       <div class="card-tags">
@@ -914,7 +945,7 @@ body {
     </a>
 
     <a href="https://rpg007-github.github.io/General-Chemistry-II/" target="_blank" class="card chem">
-      <div class="card-icon chem">&#9878;&#65039;</div>
+      <div class="card-icon chem"><span aria-hidden="true">&#9878;&#65039;</span></div>
       <h3>General Chemistry II</h3>
       <p>Kinetics, chemical equilibrium, acids and bases, buffers, solubility equilibria, thermodynamics (entropy and free energy), electrochemistry, nuclear chemistry, and coordination chemistry. Second-semester general chemistry for science majors.</p>
       <div class="card-tags">
@@ -926,7 +957,7 @@ body {
     </a>
 
     <a href="https://rpg007-github.github.io/Chemistry-for-non-majors/" target="_blank" class="card chem">
-      <div class="card-icon chem">&#127773;</div>
+      <div class="card-icon chem"><span aria-hidden="true">&#127773;</span></div>
       <h3>Chemistry for Non-Majors</h3>
       <p>Conceptual chemistry with less mathematical rigor. Covers matter and measurement, atomic structure, the periodic table, bonding, nomenclature, reaction types, the mole concept, gas laws, solutions, acids and bases, and nuclear chemistry. Designed for students fulfilling a general education science requirement.</p>
       <div class="card-tags">
@@ -938,7 +969,7 @@ body {
     </a>
 
     <a href="https://rpg007-github.github.io/Basic-Molarity-Osmolarity-Dilutions/" target="_blank" class="card chem">
-      <div class="card-icon chem">&#129514;</div>
+      <div class="card-icon chem"><span aria-hidden="true">&#129514;</span></div>
       <h3>Molarity, Osmolarity, and Dilutions</h3>
       <p>Focused topic module on concentration calculations. Covers molarity, molality, osmolarity, dilution equations (M1V1 = M2V2), percent solutions, and practical applications in biology and medicine. Especially useful for students who need to strengthen their quantitative skills for lab work or the MCAT.</p>
       <div class="card-tags">
@@ -952,7 +983,7 @@ body {
 </div>
 
 <!-- ====================== MATH & PHYSICS ====================== -->
-<div class="guide-section" id="sec-other">
+<div class="guide-section" id="sec-other" role="tabpanel">
 
   <div class="section-header">
     <div class="section-tag math">Math &amp; Physics</div>
@@ -962,7 +993,7 @@ body {
 
   <div class="card-grid">
     <a href="https://rpg007-github.github.io/College-Algebra/" target="_blank" class="card math">
-      <div class="card-icon math">&#128202;</div>
+      <div class="card-icon math"><span aria-hidden="true">&#128202;</span></div>
       <h3>College Algebra</h3>
       <p>Covers equations, functions and their graphs, quadratic functions, exponential and logarithmic functions, polynomial and rational functions, domain and range, transformations, composite and inverse functions. Written with worked examples and step-by-step explanations aimed at students who need to build confidence with algebraic foundations.</p>
       <div class="card-tags">
@@ -974,7 +1005,7 @@ body {
     </a>
 
     <a href="https://rpg007-github.github.io/Physics-I-basics/" target="_blank" class="card physics">
-      <div class="card-icon physics">&#9889;</div>
+      <div class="card-icon physics"><span aria-hidden="true">&#9889;</span></div>
       <h3>Physics I Basics</h3>
       <p>Introductory physics covering mechanics, kinematics, Newton's laws, work and energy, momentum, rotational motion, and introductory thermodynamics. Includes the key equations and problem-solving frameworks students need for both coursework and MCAT physics questions.</p>
       <div class="card-tags">
@@ -988,7 +1019,7 @@ body {
 </div>
 
 <!-- ====================== ALL RESOURCES ====================== -->
-<div class="guide-section" id="sec-all">
+<div class="guide-section" id="sec-all" role="tabpanel">
 
   <div class="section-header">
     <div class="section-tag" style="color:var(--accent);">Complete Index</div>
